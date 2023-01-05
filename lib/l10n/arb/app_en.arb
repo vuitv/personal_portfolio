@@ -1,0 +1,19 @@
+{
+    "@@locale": "en",
+    "portfolio": "Portfoli",
+    "o": "o",
+    "aboutMe": "About",
+    "me": "Me",
+
+    "headline": "I'am Zubair Rehman, Mobile App Developer from Islamabad, Pakistan",
+    "summary": "Focused professional having excellent technical and communication skills. Proficient at designing and formulating test automation frameworks, writing code in various languages, feature development and implementation. Specialize in thinking outside the box to find unique solutions to difficult engineering problems.",
+    "experience": "Experience",
+    "experienceSummary": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "skillTitle": "What Skill I Have",
+
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+
+    "rightsReserved": "©2023 VuiTv. ALL RIGHTS RESERVED."
+}

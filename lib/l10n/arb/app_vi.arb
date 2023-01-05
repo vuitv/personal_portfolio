@@ -1,0 +1,19 @@
+{
+    "@@locale": "vi",
+    "portfolio": "Portfoli",
+    "o": "o",
+    "aboutMe": "Về",
+    "me": "Tôi",
+
+    "headline": "Tôi là VuiTv, Nhà phát triển ứng dụng di động đến từ Hà Nội, Việt Nam",
+    "summary": "Chuyên nghiệp tập trung có kỹ năng kỹ thuật và giao tiếp xuất sắc. Thành thạo trong việc thiết kế và xây dựng các khung tự động hóa thử nghiệm, viết mã bằng nhiều ngôn ngữ khác nhau, phát triển và triển khai tính năng. Chuyên suy nghĩ vượt trội để tìm giải pháp độc đáo cho các vấn đề kỹ thuật khó.",
+    "experience": "Kinh nghiệm",
+    "experienceSummary": "Lorem Ipsum chỉ đơn giản là văn bản giả của ngành công nghiệp in ấn và sắp chữ.",
+    "skillTitle": "Kỹ Năng Của Tôi",
+
+    "home": "Trang chủ",
+    "about": "Về tôi",
+    "contact": "Liên hệ",
+
+    "rightsReserved": "©2023 VuiTv. ALL RIGHTS RESERVED."
+}
