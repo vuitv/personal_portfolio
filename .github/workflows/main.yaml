@@ -1,13 +1,33 @@
-name: personal_portfolio
-
-on: [pull_request, push]
-
+name: Deploy on Master
+'on':
+  push:
+    branches:
+      - master
 jobs:
-  semantic-pull-request:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Set up Flutter.
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.8'
+          channel: 'stable'
+      - run: flutter doctor -v
+      - run: flutter packages pub global activate melos
+      - run: melos bootstrap
 
-  build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
-    with:
-      flutter_channel: stable
-      flutter_version: 3.3.8
+      # Build and Archive Web.
+      - run: flutter build web --release --web-renderer canvaskit --target lib/main_production.dart
+
+      - name: Pushes to Host repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'build/web'
+          destination-github-username: 'vuitv'
+          destination-repository-name: 'me'
+          target-branch: master
+

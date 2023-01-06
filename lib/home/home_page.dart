@@ -12,21 +12,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: const Color(0xFFF7F8FA),
+      color: Theme.of(context).backgroundColor,
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           maxWidth: 1200,
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: context.isMobile ? 0 : 140,
+            horizontal: context.responsive(140, 0, 64),
           ),
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              titleSpacing: 0,
               title: RichText(
                 text: TextSpan(
                   style: const TextStyle(
@@ -41,7 +38,7 @@ class HomePage extends StatelessWidget {
                     TextSpan(
                       text: context.l10n.o,
                       style: TextStyles.logo.copyWith(
-                        color: const Color(0xFF50AFC0),
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ],
@@ -53,7 +50,7 @@ class HomePage extends StatelessWidget {
                         child: Text(
                           context.l10n.home,
                           style: TextStyles.menuItem.copyWith(
-                            color: const Color(0xFF50AFC0),
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                         onPressed: () {},
@@ -84,7 +81,7 @@ class HomePage extends StatelessWidget {
                           child: Text(
                             context.l10n.home,
                             style: TextStyles.menuItem.copyWith(
-                              color: const Color(0xFF50AFC0),
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                           ),
                           onPressed: () {},
@@ -243,7 +240,7 @@ class HomePage extends StatelessWidget {
           TextSpan(
             text: ' ${context.l10n.me}',
             style: TextStyles.heading.copyWith(
-              color: const Color(0xFF50AFC0),
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
         ],

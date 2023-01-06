@@ -12,9 +12,17 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: FontFamily.quicksand,
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
+        backgroundColor: const Color(0xFFF7F8FA),
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          titleSpacing: 0,
+          backgroundColor: Colors.transparent,
+          iconTheme: IconThemeData(
+            color: Color(0xFF50AFC0),
+          ),
+        ),
         colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
+          accentColor: const Color(0xFF50AFC0),
         ),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
