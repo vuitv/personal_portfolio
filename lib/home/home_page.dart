@@ -24,6 +24,8 @@ class HomePage extends StatelessWidget {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
               titleSpacing: 0,
               title: RichText(
                 text: TextSpan(
@@ -45,64 +47,66 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              actions: [
-                MaterialButton(
-                  child: Text(
-                    context.l10n.home,
-                    style: TextStyles.menuItem.copyWith(
-                      color: const Color(0xFF50AFC0),
-                    ),
-                  ),
-                  onPressed: () {},
-                ),
-                MaterialButton(
-                  child: Text(
-                    context.l10n.about,
-                    style: TextStyles.menuItem,
-                  ),
-                  onPressed: () {},
-                ),
-                MaterialButton(
-                  child: Text(
-                    context.l10n.contact,
-                    style: TextStyles.menuItem,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-            drawer: Drawer(
-              child: ListView(
-                padding: const EdgeInsets.all(20),
-                children: [
-                  MaterialButton(
-                    child: Text(
-                      context.l10n.home,
-                      style: TextStyles.menuItem.copyWith(
-                        color: const Color(0xFF50AFC0),
+              actions: !context.isMobile
+                  ? [
+                      MaterialButton(
+                        child: Text(
+                          context.l10n.home,
+                          style: TextStyles.menuItem.copyWith(
+                            color: const Color(0xFF50AFC0),
+                          ),
+                        ),
+                        onPressed: () {},
                       ),
-                    ),
-                    onPressed: () {},
-                  ),
-                  MaterialButton(
-                    child: Text(
-                      context.l10n.about,
-                      style: TextStyles.menuItem,
-                    ),
-                    onPressed: () {},
-                  ),
-                  MaterialButton(
-                    child: Text(
-                      context.l10n.contact,
-                      style: TextStyles.menuItem,
-                    ),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+                      MaterialButton(
+                        child: Text(
+                          context.l10n.about,
+                          style: TextStyles.menuItem,
+                        ),
+                        onPressed: () {},
+                      ),
+                      MaterialButton(
+                        child: Text(
+                          context.l10n.contact,
+                          style: TextStyles.menuItem,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ]
+                  : null,
             ),
+            drawer: context.isMobile
+                ? Drawer(
+                    child: ListView(
+                      padding: const EdgeInsets.all(20),
+                      children: [
+                        MaterialButton(
+                          child: Text(
+                            context.l10n.home,
+                            style: TextStyles.menuItem.copyWith(
+                              color: const Color(0xFF50AFC0),
+                            ),
+                          ),
+                          onPressed: () {},
+                        ),
+                        MaterialButton(
+                          child: Text(
+                            context.l10n.about,
+                            style: TextStyles.menuItem,
+                          ),
+                          onPressed: () {},
+                        ),
+                        MaterialButton(
+                          child: Text(
+                            context.l10n.contact,
+                            style: TextStyles.menuItem,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  )
+                : null,
             body: LayoutBuilder(
               builder: (context, constraints) {
                 return SingleChildScrollView(
@@ -168,7 +172,14 @@ class HomePage extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Expanded(child: _buildContent(context)),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+              ),
+              child: _buildContent(context),
+            ),
+          ),
           const Divider(),
           _buildCopyRightText(context),
           SizedBox(height: context.isMobile ? 12.0 : 0.0),
@@ -179,7 +190,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Body Methods:--------------------------------------------------------------
   Widget _buildIllustration() {
     return Assets.lottie.coder.lottie(
       width: 345,
@@ -326,22 +336,22 @@ class HomePage extends StatelessWidget {
 
   final educationList = [
     Education(
-      'Apr 2018',
+      'September 2022',
       'Present',
-      'Embrace-it Pakistan',
-      'Sr. Software Engineer',
+      'Vido Center LLC',
+      'Mobile Developer',
     ),
     Education(
-      'Apr 2016',
-      'Apr 2018',
-      'TEO International',
-      'Sr. Software Engineer',
+      'April 2020',
+      'September 2022',
+      'Sapo Technology JSC',
+      'Mobile Developer',
     ),
     Education(
-      'July 2014',
-      'March 2016',
-      'Citrusbits',
-      'Software Engineer',
+      'September 2012',
+      'January 2017',
+      'Electric Power University',
+      'Software technology',
     ),
   ];
 
