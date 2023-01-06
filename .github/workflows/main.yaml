@@ -15,8 +15,8 @@ jobs:
           flutter-version: '3.3.8'
           channel: 'stable'
       - run: flutter doctor -v
-      - run: flutter packages pub global activate melos
-      - run: melos bootstrap
+      - run: flutter pub get
+      - run: flutter pub run build_runner build -d
 
       # Build and Archive Web.
       - run: flutter build web --release --web-renderer canvaskit --target lib/main_production.dart

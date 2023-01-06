@@ -45,12 +45,8 @@ class $AssetsLottieGen {
 class Assets {
   Assets._();
 
-  static const String fontManifest = 'assets/FontManifest.json';
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
-
-  /// List of all assets
-  List<String> get values => [fontManifest];
 }
 
 class AssetGenImage {
