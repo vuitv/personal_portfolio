@@ -1,7 +1,6 @@
 {
     "@@locale": "en",
-    "portfolio": "Portfoli",
-    "o": "o",
+    "portfolio": "Portfolio",
     "aboutMe": "About",
     "me": "Me",
 
@@ -15,5 +14,5 @@
     "about": "About",
     "contact": "Contact",
 
-    "rightsReserved": "©2023 VuiTv. ALL RIGHTS RESERVED."
+    "rightsReserved": "©2023 VuiTv. All rights reserved."
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:personal_portfolio/constants/text_styles.dart';
 import 'package:personal_portfolio/gen/assets.gen.dart';
-import 'package:personal_portfolio/gen/fonts.gen.dart';
 import 'package:personal_portfolio/l10n/l10n.dart';
 import 'package:personal_portfolio/models/education.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vuitv/vuitv.dart';
 
 class HomePage extends StatelessWidget {
@@ -32,11 +32,14 @@ class HomePage extends StatelessWidget {
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                      text: context.l10n.portfolio,
+                      text: context.l10n.portfolio.substring(
+                        0,
+                        context.l10n.portfolio.length - 1,
+                      ),
                       style: TextStyles.logo,
                     ),
                     TextSpan(
-                      text: context.l10n.o,
+                      text: context.l10n.portfolio.characters.last,
                       style: TextStyles.logo.copyWith(
                         color: Theme.of(context).colorScheme.secondary,
                       ),
@@ -177,11 +180,7 @@ class HomePage extends StatelessWidget {
               child: _buildContent(context),
             ),
           ),
-          const Divider(),
-          _buildCopyRightText(context),
-          SizedBox(height: context.isMobile ? 12.0 : 0.0),
-          _buildSocialIcons(),
-          SizedBox(height: context.isMobile ? 12.0 : 0.0),
+          _buildFooter(context),
         ],
       ),
     );
@@ -233,7 +232,6 @@ class HomePage extends StatelessWidget {
           TextSpan(
             text: context.l10n.aboutMe,
             style: TextStyles.heading.copyWith(
-              fontFamily: FontFamily.nexa,
               fontWeight: FontWeight.w300,
             ),
           ),
@@ -279,12 +277,12 @@ class HomePage extends StatelessWidget {
   }
 
   final skills = [
-    'Java',
-    'Kotlin',
     'Dart',
     'Flutter',
     'Android',
     'iOS',
+    'Java',
+    'Kotlin',
     'React Native',
     'Reactive Programming',
     'GitHub',
@@ -444,41 +442,35 @@ class HomePage extends StatelessWidget {
 
   Widget _buildSocialIcons() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         GestureDetector(
-          onTap: () {},
-          child: Assets.icons.icLinkedIn.image(
-            color: const Color(0xFF45405B),
-            height: 20,
-            width: 20,
+          onTap: () {
+            launchUrl(Uri.parse('https://github.com/vuitv'));
+          },
+          child: Assets.icons.github.svg(
+            height: 24,
+            width: 24,
           ),
         ),
         const SizedBox(width: 16),
         GestureDetector(
-          onTap: () {},
-          child: Assets.icons.icEvernote.image(
-            color: const Color(0xFF45405B),
-            height: 20,
-            width: 20,
+          onTap: () {
+            launchUrl(Uri.parse('https://t.me/vuitv'));
+          },
+          child: Assets.icons.telegram.svg(
+            height: 24,
+            width: 24,
           ),
         ),
         const SizedBox(width: 16),
         GestureDetector(
-          onTap: () {},
-          child: Assets.icons.icGoogle.image(
-            color: const Color(0xFF45405B),
-            height: 20,
-            width: 20,
-          ),
-        ),
-        const SizedBox(width: 16),
-        GestureDetector(
-          onTap: () {},
-          child: Assets.icons.icTwitter.image(
-            color: const Color(0xFF45405B),
-            height: 20,
-            width: 20,
+          onTap: () {
+            launchUrl(Uri.parse('https://www.facebook.com/vuiit'));
+          },
+          child: Assets.icons.facebook.svg(
+            height: 24,
+            width: 24,
           ),
         ),
       ],

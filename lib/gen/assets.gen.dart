@@ -8,28 +8,30 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
-  /// File path: assets/icons/ic_dribbble.png
-  AssetGenImage get icDribbble => const AssetGenImage('assets/icons/ic_dribbble.png');
+  /// File path: assets/icons/facebook.svg
+  SvgGenImage get facebook => const SvgGenImage('assets/icons/facebook.svg');
 
-  /// File path: assets/icons/ic_evernote.png
-  AssetGenImage get icEvernote => const AssetGenImage('assets/icons/ic_evernote.png');
+  /// File path: assets/icons/github.svg
+  SvgGenImage get github => const SvgGenImage('assets/icons/github.svg');
 
-  /// File path: assets/icons/ic_google.png
-  AssetGenImage get icGoogle => const AssetGenImage('assets/icons/ic_google.png');
+  /// File path: assets/icons/skype.svg
+  SvgGenImage get skype => const SvgGenImage('assets/icons/skype.svg');
 
-  /// File path: assets/icons/ic_linkedIn.png
-  AssetGenImage get icLinkedIn => const AssetGenImage('assets/icons/ic_linkedIn.png');
+  /// File path: assets/icons/telegram.svg
+  SvgGenImage get telegram => const SvgGenImage('assets/icons/telegram.svg');
 
-  /// File path: assets/icons/ic_twitter.png
-  AssetGenImage get icTwitter => const AssetGenImage('assets/icons/ic_twitter.png');
+  /// File path: assets/icons/twitter.svg
+  SvgGenImage get twitter => const SvgGenImage('assets/icons/twitter.svg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [icDribbble, icEvernote, icGoogle, icLinkedIn, icTwitter];
+  List<SvgGenImage> get values => [facebook, github, skype, telegram, twitter];
 }
 
 class $AssetsLottieGen {
@@ -108,6 +110,57 @@ class AssetGenImage {
   }
 
   ImageProvider provider() => AssetImage(_assetName);
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    Color? color,
+    BlendMode colorBlendMode = BlendMode.srcIn,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    Clip clipBehavior = Clip.hardEdge,
+    bool cacheColorFilter = false,
+    SvgTheme? theme,
+  }) {
+    return SvgPicture.asset(
+      _assetName,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
+      theme: theme,
+    );
+  }
 
   String get path => _assetName;
 

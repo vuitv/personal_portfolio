@@ -5,7 +5,7 @@ class TextStyles {
   TextStyles._();
 
   static TextStyle get logo => const TextStyle(
-        fontFamily: FontFamily.productSans,
+        fontFamily: FontFamily.quicksand,
         color: Color(0xFF45405B),
         fontSize: 22,
         //22.0
@@ -14,14 +14,14 @@ class TextStyles {
       );
 
   static TextStyle get menuItem => const TextStyle(
-        fontFamily: FontFamily.productSans,
+        fontFamily: FontFamily.quicksand,
         fontSize: 12, //12,.0
         letterSpacing: 1,
         color: Color(0xFF45405B),
       );
 
   static TextStyle get heading => const TextStyle(
-        fontFamily: FontFamily.nexa,
+        fontFamily: FontFamily.quicksand,
         color: Color(0xFF45405B),
         fontSize: 45,
         //45.0
@@ -31,13 +31,13 @@ class TextStyles {
 
   static TextStyle get subHeading => const TextStyle(
         color: Color(0xFF45405B),
-        fontFamily: FontFamily.productSans,
+        fontFamily: FontFamily.quicksand,
         fontSize: 17, //17.0
         letterSpacing: 1.2,
       );
 
   static TextStyle get company => const TextStyle(
-        fontFamily: FontFamily.productSans,
+        fontFamily: FontFamily.quicksand,
         color: Color(0xFF45405B),
         height: 1.5,
         fontSize: 15,
@@ -46,7 +46,7 @@ class TextStyles {
       );
 
   static TextStyle get body => const TextStyle(
-        fontFamily: FontFamily.productSans,
+        fontFamily: FontFamily.quicksand,
         color: Color(0xFF85819C),
         height: 1.5,
         fontSize: 12,
@@ -55,7 +55,7 @@ class TextStyles {
       );
 
   static TextStyle get body1 => const TextStyle(
-        fontFamily: FontFamily.productSans,
+        fontFamily: FontFamily.quicksand,
         color: Color(0xFF85819C),
         height: 1.5,
         fontSize: 10,
@@ -64,9 +64,8 @@ class TextStyles {
       );
 
   static TextStyle get chip => const TextStyle(
-        fontFamily: FontFamily.productSans,
+        fontFamily: FontFamily.quicksand,
         color: Color(0xFF85819C),
-        height: 1.5,
         fontSize: 12,
         //12.0
         letterSpacing: 1,
