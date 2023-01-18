@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:personal_portfolio/constants/text_styles.dart';
 import 'package:personal_portfolio/gen/assets.gen.dart';
-import 'package:personal_portfolio/l10n/l10n.dart';
-import 'package:personal_portfolio/models/education.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:personal_portfolio/home/widget/content.dart';
+import 'package:personal_portfolio/home/widget/footer.dart';
+import 'package:personal_portfolio/home/widget/menu_button.dart';
+import 'package:personal_portfolio/home/widget/text_title.dart';
 import 'package:vuitv/vuitv.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,105 +24,27 @@ class HomePage extends StatelessWidget {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppBar(
-              title: RichText(
-                text: TextSpan(
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: context.l10n.portfolio.substring(
-                        0,
-                        context.l10n.portfolio.length - 1,
-                      ),
-                      style: TextStyles.logo,
-                    ),
-                    TextSpan(
-                      text: context.l10n.portfolio.characters.last,
-                      style: TextStyles.logo.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              actions: !context.isMobile
-                  ? [
-                      MaterialButton(
-                        child: Text(
-                          context.l10n.home,
-                          style: TextStyles.menuItem.copyWith(
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                        ),
-                        onPressed: () {},
-                      ),
-                      MaterialButton(
-                        child: Text(
-                          context.l10n.about,
-                          style: TextStyles.menuItem,
-                        ),
-                        onPressed: () {},
-                      ),
-                      MaterialButton(
-                        child: Text(
-                          context.l10n.contact,
-                          style: TextStyles.menuItem,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ]
+              title: const TextTitle(),
+              actions: !context.isMobile //
+                  ? MenuButton.menus
                   : null,
             ),
             drawer: context.isMobile
                 ? Drawer(
                     child: ListView(
                       padding: const EdgeInsets.all(20),
-                      children: [
-                        MaterialButton(
-                          child: Text(
-                            context.l10n.home,
-                            style: TextStyles.menuItem.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                          ),
-                          onPressed: () {},
-                        ),
-                        MaterialButton(
-                          child: Text(
-                            context.l10n.about,
-                            style: TextStyles.menuItem,
-                          ),
-                          onPressed: () {},
-                        ),
-                        MaterialButton(
-                          child: Text(
-                            context.l10n.contact,
-                            style: TextStyles.menuItem,
-                          ),
-                          onPressed: () {},
-                        ),
+                      children: const [
+                        ...MenuButton.menus,
                       ],
                     ),
                   )
                 : null,
-            body: LayoutBuilder(
-              builder: (context, constraints) {
-                return SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minWidth: constraints.maxWidth,
-                      minHeight: constraints.maxHeight,
-                    ),
-                    child: Responsive(
-                      desktop: _buildLargeScreen(context),
-                      tablet: _buildMediumScreen(context),
-                      mobile: _buildSmallScreen(context),
-                    ),
-                  ),
-                );
-              },
+            body: SingleChildScrollView(
+              child: Responsive(
+                desktop: _buildLargeScreen(),
+                tablet: _buildMediumScreen(),
+                mobile: _buildSmallScreen(),
+              ),
             ),
           ),
         ),
@@ -130,350 +52,68 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildLargeScreen(BuildContext context) {
+  Widget _buildLargeScreen() {
     return IntrinsicHeight(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Expanded(
             child: Row(
-              children: <Widget>[
-                Expanded(child: _buildContent(context)),
-                _buildIllustration(),
+              children: const <Widget>[
+                Expanded(child: Content()),
+                Illustration(),
               ],
             ),
           ),
-          _buildFooter(context)
+          const Footer(),
         ],
       ),
     );
   }
 
-  Widget _buildMediumScreen(BuildContext context) {
+  Widget _buildMediumScreen() {
     return IntrinsicHeight(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Expanded(
             child: Row(
-              children: <Widget>[
-                Expanded(child: _buildContent(context)),
+              children: const <Widget>[
+                Expanded(child: Content()),
               ],
             ),
           ),
-          _buildFooter(context)
+          const Footer(),
         ],
       ),
     );
   }
 
-  Widget _buildSmallScreen(BuildContext context) {
+  Widget _buildSmallScreen() {
     return IntrinsicHeight(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
+        children: const <Widget>[
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24,
-              ),
-              child: _buildContent(context),
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: Content(),
             ),
           ),
-          _buildFooter(context),
+          Footer(),
         ],
       ),
     );
   }
+}
 
-  Widget _buildIllustration() {
+class Illustration extends StatelessWidget {
+  const Illustration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Assets.lottie.coder.lottie(
       width: 345,
-    );
-  }
-
-  Widget _buildContent(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(height: context.isMobile ? 24.0 : 0.0),
-        _buildAboutMe(context),
-        const SizedBox(height: 4),
-        _buildHeadline(context),
-        SizedBox(height: context.isMobile ? 12.0 : 24.0),
-        _buildSummary(context),
-        SizedBox(height: context.isMobile ? 24.0 : 48.0),
-        if (context.isMobile)
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildEducation(context),
-              const SizedBox(height: 24),
-              _buildSkills(context),
-            ],
-          )
-        else
-          _buildSkillsAndEducation(context)
-      ],
-    );
-  }
-
-  Widget _buildAboutMe(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        style: TextStyle(
-          fontSize: context.isMobile ? 36 : 45.0,
-          color: Colors.black,
-        ),
-        children: <TextSpan>[
-          TextSpan(
-            text: context.l10n.aboutMe,
-            style: TextStyles.heading.copyWith(
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-          TextSpan(
-            text: ' ${context.l10n.me}',
-            style: TextStyles.heading.copyWith(
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildHeadline(BuildContext context) {
-    return Text(
-      context.l10n.headline,
-      style: TextStyles.subHeading,
-    );
-  }
-
-  Widget _buildSummary(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 80),
-      child: Text(
-        context.l10n.summary,
-        style: TextStyles.body,
-      ),
-    );
-  }
-
-  Widget _buildSkillsAndEducation(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Expanded(child: _buildEducation(context)),
-        const SizedBox(width: 40),
-        Expanded(
-          child: _buildSkills(context),
-        ),
-      ],
-    );
-  }
-
-  final skills = [
-    'Dart',
-    'Flutter',
-    'Android',
-    'iOS',
-    'Java',
-    'Kotlin',
-    'React Native',
-    'Reactive Programming',
-    'GitHub',
-    'Photoshop',
-    'Figma',
-  ];
-
-  Widget _buildSkills(BuildContext context) {
-    final widgets = skills
-        .map(
-          (skill) => _buildSkillChip(context, skill),
-        )
-        .toList();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _buildSkillsContainerHeading(context),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: widgets,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSkillsContainerHeading(BuildContext context) {
-    return Text(
-      context.l10n.skillTitle,
-      style: TextStyles.subHeading,
-    );
-  }
-
-  Widget _buildSkillChip(BuildContext context, String label) {
-    return Chip(
-      label: Text(
-        label,
-        style: TextStyles.chip.copyWith(
-          fontSize: context.isMobile ? 10.0 : 11.0,
-        ),
-      ),
-    );
-  }
-
-  final educationList = [
-    Education(
-      'September 2022',
-      'Present',
-      'Vido Center LLC',
-      'Mobile Developer',
-    ),
-    Education(
-      'April 2020',
-      'September 2022',
-      'Sapo Technology JSC',
-      'Mobile Developer',
-    ),
-    Education(
-      'September 2012',
-      'January 2017',
-      'Electric Power University',
-      'Software technology',
-    ),
-  ];
-
-  Widget _buildEducation(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _buildEducationContainerHeading(context),
-        _buildEducationSummary(context),
-        const SizedBox(height: 8),
-        _buildEducationTimeline(),
-      ],
-    );
-  }
-
-  Widget _buildEducationContainerHeading(BuildContext context) {
-    return Text(
-      context.l10n.experience,
-      style: TextStyles.subHeading,
-    );
-  }
-
-  Widget _buildEducationSummary(BuildContext context) {
-    return Text(
-      context.l10n.experienceSummary,
-      style: TextStyles.body,
-    );
-  }
-
-  Widget _buildEducationTimeline() {
-    final widgets = educationList.map(_buildEducationTile).toList();
-    return Column(children: widgets);
-  }
-
-  Widget _buildEducationTile(Education education) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text(
-            education.post,
-            style: TextStyles.company,
-          ),
-          Text(
-            education.organization,
-            style: TextStyles.body.copyWith(
-              color: const Color(0xFF45405B),
-            ),
-          ),
-          Text(
-            '${education.from}-${education.to}',
-            style: TextStyles.body,
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Footer Methods:------------------------------------------------------------
-  Widget _buildFooter(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        const Divider(),
-        Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Align(
-                alignment: Alignment.centerLeft,
-                child: _buildCopyRightText(context),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: _buildSocialIcons(),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCopyRightText(BuildContext context) {
-    return Text(
-      context.l10n.rightsReserved,
-      style: TextStyles.body1.copyWith(
-        fontSize: context.isMobile ? 8 : 10.0,
-      ),
-    );
-  }
-
-  Widget _buildSocialIcons() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        GestureDetector(
-          onTap: () {
-            launchUrl(Uri.parse('https://github.com/vuitv'));
-          },
-          child: Assets.icons.github.svg(
-            height: 24,
-            width: 24,
-          ),
-        ),
-        const SizedBox(width: 16),
-        GestureDetector(
-          onTap: () {
-            launchUrl(Uri.parse('https://t.me/vuitv'));
-          },
-          child: Assets.icons.telegram.svg(
-            height: 24,
-            width: 24,
-          ),
-        ),
-        const SizedBox(width: 16),
-        GestureDetector(
-          onTap: () {
-            launchUrl(Uri.parse('https://www.facebook.com/vuiit'));
-          },
-          child: Assets.icons.facebook.svg(
-            height: 24,
-            width: 24,
-          ),
-        ),
-      ],
     );
   }
 }
